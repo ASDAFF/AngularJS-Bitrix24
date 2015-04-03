@@ -1,1 +1,2 @@
-# AngularJS-Firewall-for-tuchk4-seed
+# AngularJS application in Bitrix24 
+
