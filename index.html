@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detail Admin - Tables showcase</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/style.min.css"/>
+    <script>
+        window.ENV = 'prod';
+    </script>
+    <!--[if lt IE 9]>
+    <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="my-app">
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top navbar-bx" role="navigation" ng-controller="MenuController">
+        <ul class="nav navbar-nav navbar-left" ng-show="menuItemsReady" ng-cloak  id="dashboard-menu">
+            <li ng-repeat="menuItem in menuItems">
+                <a href="{{menuItem.route}}">
+                    <i class="{{menuItem.class}}"></i>
+                    <span ng-bind="menuItem.caption"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- end sidebar -->
+    <div class="clearfix"></div>
+    <!-- main container -->
+    <div class="content">
+        <div id="loaders">
+            <div id="application-spinner"  ng-show="spinner" clas="col-xs-6">
+                <div class="modal-backdrop fade in text-center">
+                    <img src="/assets/images/spinners/spinner128a.gif" alt="" class="img vertical-align" width="128" height="78"/>
+                </div>
+            </div>
+        </div>
+        <div id="pad-wrapper" ng-view></div>
+    </div>
+    <!-- end main container -->
+</div>
+
+
+<script>
+    function _addScript(src, main){
+        var script = document.createElement('script');
+        script.src = src + '?r=' + (new Date()).getUTCMilliseconds();
+        script.async = false;
+
+        if (main){
+            script.setAttribute('data-main', main);
+        }
+
+        document.getElementsByTagName('head')[0].appendChild(script);
+    }
+
+    if (window.ENV == 'dev'){
+        _addScript('/bower_components/requirejs/require.js', '/app/boot');
+    } else if (window.ENV == 'prod'){
+        _addScript('/bower_components/requirejs/require.js');
+        _addScript('/assets/js/vendors.js');
+        _addScript('/assets/js/app.js');
+    }
+</script>
+</body>
+</html>

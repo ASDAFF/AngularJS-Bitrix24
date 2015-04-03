@@ -1,0 +1,70 @@
+<!-- products table-->
+<!-- the script for the toggle all checkboxes from header is located in js/theme.js -->
+<div class="table-wrapper products-table section" ng-show="$root.firewallSuccess">
+    <div class="row head">
+        <div class="col-md-12">
+            <h4>{{title}}</h4>
+        </div>
+    </div>
+    {{domains.fill}}
+    <div class="row filter-block">
+        <div class="pull-right">
+            <input type="text" ng-model="domains.searchText" class="search">
+            <a class="btn-flat success new-product" ng-click="domainAdd()">+ Добавить домен</a>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th class="col-md-3">
+                    Название
+                </th>
+                <th class="col-md-3">
+                    Дата окончания
+                </th>
+                <th class="col-md-3">
+                    <span class="line"></span>Описание
+                </th>
+                <th class="col-md-2">
+                    <span class="line"></span>Статус
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- row -->
+            <tr ng-repeat="domain in domains.filteredList  | orderBy: domains.currentFilter.order : domain.currentFilter.asc |
+                startFrom: ( domains.currentPage - 1 ) * domains.itemsPerPage | limitTo:domains.itemsPerPage">
+                <td>
+                    <div class="img">
+                        <img width="20" height="20" ng-src="https://www.google.com/s2/favicons?domain={{aliasDomain}}">
+                    </div>
+                    <a ng-href="http://{{domain.name}}" target="_blank" class="name">{{domain.name}}</a>
+                    <span class="name label ng-binding label-info white-url"><a title="Просмотреть whois на nic.ru" ng-init="aliasDomain = toASCII(domain.name)" ng-href="https://www.nic.ru/whois/?query={{aliasDomain}}" target="_blank">whois</a></span>
+                </td>
+                <td>
+                    <span title="{{domain.is_manual?'установлен вручную':'установлен автоматически'}}" ng-class="{false: 'label-success', true: 'label-info'}[domain.is_manual]"  class="label">{{domain.expiration_date | date:'dd.MM.yyyy'}}</span>
+                </td>
+                <td class="description">
+                    {{domain.comment}}
+                </td>
+                <td>
+                    <span class="label" ng-class="st.class" ng-init="st = status(domain.expiration_date)">{{st.text}}</span>
+                    <ul class="actions">
+                        <li><i ng-click="domainEdit(domain)" class="table-edit" title="Редактировать"></i></li>
+                        <li><i ng-click="domainWhois(domain)" class="table-settings" title="Обновить дату окончания"></i></a></li>
+                        <li class="last"><i ng-click="domainRemove(domain)" class="table-delete" title="Удалить"></i></li>
+                    </ul>
+                </td>
+            </tr>
+            <tr ng-hide="domains.filteredList.length"><td colspan="4">Ничего не найдено</td></tr>
+            <!-- row -->
+
+            </tbody>
+        </table>
+        <pagination ng-if="domains.filteredList.length > domains.itemsPerPage" boundary-links="true" items-per-page="domains.itemsPerPage" max-size="domains.maxSize" total-items="domains.totalItems" ng-model="domains.currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+
+        </body>
+    </div>
+</div>
+<!-- end products table -->

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="SU155" default="build">
+    <target name="build" depends="npm,bower,grunt,fcommit"/>
+
+    <target name="npm" description="Install npm">
+        <exec command="npm install" passthru="true" />
+    </target>
+
+    <target name="bower" description="Download bower components">
+        <exec command="bower install" passthru="true" />
+    </target>
+
+    <target name="grunt" description="Build front scripts ans styles">
+        <exec command="grunt" passthru="true" />
+    </target>
+
+    <target name="fcommit" description="Commit front build">
+        <exec command="git add . --all" passthru="true" />
+        <exec command="git commit -m 'front build on stage server'" passthru="true" />
+        <exec command="git pull prod" passthru="true" />
+    </target>
+
+</project>

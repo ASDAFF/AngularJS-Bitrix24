@@ -1,0 +1,54 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="modalOptions.close()" aria-hidden="true">&times;</button>
+    <h4 class="modal-title">{{modalOptions.headerText}}</h4>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal" name="newDomain">
+        <fieldset>
+            <!-- Prepended text-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="name">Название</label>
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <span class="input-group-addon">http://</span>
+                        <input ng-model="$parent.form.hosting.name" id="name" name="name" class="form-control" placeholder="Название хостинга" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Appended checkbox -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="expiration date">Дата продления</label>
+                <div class="col-md-8">
+                    <input ng-model="$parent.form.hosting.expiration_date" ng-blur="fixJqueryEvent($event)" id="expiration_date" name="expiration_date" type="text"  class="form-control input-md">
+                </div>
+            </div>
+
+
+            <!-- Comment -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="comment">Комментарий</label>
+                <div class="col-md-8">
+                    <textarea ng-model="$parent.form.hosting.comment" style="resize:none;" name="comment" id="comment" cols="30" rows="3" class="form-control"></textarea>
+                </div>
+            </div>
+
+            <!-- Multiple Checkboxes (inline) -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="checkboxes">Уровни доступа</label>
+                <div class="col-md-4">
+                    <label class="checkbox-inline" for="checkboxes-0">
+                        <input type="checkbox" ng-checked="$parent.form.hosting.is_shared" ng-model="$parent.form.hosting.is_shared" name="is_shared" id="checkboxes-0" value="1">
+                        Общий доступ
+                    </label>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="modalOptions.close()">{{modalOptions.closeButtonText}}</button>
+    <button type="button" class="btn btn-primary" ng-click="modalOptions.ok();">{{modalOptions.actionButtonText}}</button>
+</div>
+

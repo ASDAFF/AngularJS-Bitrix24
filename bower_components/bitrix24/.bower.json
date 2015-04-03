@@ -1,0 +1,14 @@
+{
+  "name": "bitrix24",
+  "main": "./v1.js",
+  "dependencies": {},
+  "_release": "01fc187f5d",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "01fc187f5d9c4c915f37ec56a73cb1ac757837bd"
+  },
+  "_source": "http://gitlab.binardi.ru/binardi/bx24.git",
+  "_target": "*",
+  "_originalSource": "http://gitlab.binardi.ru/binardi/bx24.git"
+}

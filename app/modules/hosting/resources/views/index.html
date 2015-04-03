@@ -1,0 +1,66 @@
+<!-- products table-->
+<!-- the script for the toggle all checkboxes from header is located in js/theme.js -->
+<div class="table-wrapper products-table section" ng-show="$root.firewallSuccess">
+    <div class="row head">
+        <div class="col-md-12">
+            <h4>{{title}}</h4>
+        </div>
+    </div>
+
+    <div class="row filter-block">
+        <div class="pull-right">
+            <input type="text" ng-model="hosting.options.searchText" class="search">
+            <a class="btn-flat success new-product" ng-click="hostingAdd()">+ Добавить хостинг</a>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th class="col-md-3">
+                    Название
+                </th>
+                <th class="col-md-3">
+                    Дата оплаты
+                </th>
+                <th class="col-md-3">
+                    <span class="line"></span>Описание
+                </th>
+                <th class="col-md-2">
+                    <span class="line"></span>Статус
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- row -->
+            <tr ng-repeat="host in hosting.filteredList  | orderBy: hosting.options.currentFilter.order | filter: hosting.options.searchText |
+                startFrom: ( hosting.options.currentPage - 1 ) * hosting.options.itemsPerPage | limitTo:hosting.options.itemsPerPage">
+                <td>
+                    <div class="img">
+                        <img width="20" height="20" ng-src="https://www.google.com/s2/favicons?domain={{host.name}}">
+                    </div>
+                    <a ng-href="http://{{host.name}}" target="_blank" class="name">{{host.name}}</a>
+                </td>
+                <td>{{host.expiration_date | date:'dd.MM.yyyy'}}</td>
+                <td class="description">
+                    {{host.comment}}
+                </td>
+                <td>
+                    <span class="label {{st.class}}" ng-init="st = status(host.expiration_date)">{{st.text}}</span>
+                    <ul class="actions">
+                        <li><i ng-click="hostingEdit(host)" class="table-edit" title="Редактировать"></i></li>
+                        <li class="last"><i ng-click="hostingRemove(host)" class="table-delete" title="Удалить"></i></li>
+                    </ul>
+                </td>
+            </tr>
+            <tr ng-hide="hosting.options.filteredList.length"><td colspan="4">Ничего не найдено</td></tr>
+            <!-- row -->
+
+            </tbody>
+        </table>
+        <pagination ng-if="hosting.options.filteredList.length > hosting.options.itemsPerPage" boundary-links="true" items-per-page="hosting.options.itemsPerPage" max-size="hosting.options.maxSize" total-items="hosting.options.totalItems" ng-model="hosting.options.currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+
+        </body>
+    </div>
+</div>
+<!-- end products table -->

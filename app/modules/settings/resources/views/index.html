@@ -1,0 +1,107 @@
+<div ng-show="$root.firewallSuccess">
+    <div class="col-md-6">
+        <form class="form-horizontal">
+            <fieldset>
+
+                <!-- Form Name -->
+                <legend>Доступ к управлению доменами</legend>
+                <!-- Multiple Radios -->
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <div class="radio">
+                            <label for="radios-0">
+                                <input type="radio" name="radios" id="radios-0" ng-value="true" ng-model="setting.isDomainsShared" ng-checked="setting.isDomainsShared">
+                                Доступно всем пользователям
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label for="radios-1">
+                                <input type="radio" name="radios" id="radios-1" ng-value="false" ng-model="setting.isDomainsShared">
+                                Доступно выбранным пользователям
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-class="{true: 'disabled'}[setting.isDomainsShared]">
+                    <label class="col-md-12" for="checkboxes">Пользователи</label>
+                    <div class="col-md-12 ">
+                        <div class="checkbox">
+                            <label>
+                                <p>
+                                <input type="checkbox" ng-disabled="setting.isDomainsShared" ng-model="allUsersDomain">
+                                Отметить всех
+                                </p>
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-12">
+                        <div class="checkbox" ng-repeat="user in setting.userList">
+                            <label>
+                                <input ng-disabled="setting.isDomainsShared || (user.ID === $root.user.ID)" type="checkbox" checklist-model="setting.sharedDomainUsers" checklist-value="user.ID">
+                                {{user.LAST_NAME}} {{user.NAME}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <form class="form-horizontal">
+            <fieldset>
+
+                <!-- Form Name -->
+                <legend>Доступ к управлению хостингами</legend>
+
+                <!-- Multiple Radios -->
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <div class="radio">
+                            <label for="radios-2">
+                                <input type="radio" name="radios" id="radios-2" ng-value="true" ng-model="setting.isHostingsShared" ng-checked="setting.isHostingsShared">
+                                Доступно всем пользователям
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label for="radios-3">
+                                <input type="radio" name="radios" id="radios-3" ng-value="false" ng-model="setting.isHostingsShared">
+                                Доступно выбранным пользователям
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-class="{true: 'disabled'}[setting.isHostingsShared]">
+                    <label class="col-md-12" for="checkboxes">Пользователи</label>
+                    <div class="col-md-12 ">
+                        <div class="checkbox">
+                            <label>
+                                <p>
+                                    <input type="checkbox" ng-disabled="setting.isHostingsShared" ng-model="allUsersHosting" >
+                                    Отметить всех
+                                </p>
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-12">
+                        <div class="checkbox" ng-repeat="user in setting.userList">
+                            <label>
+                                <input ng-disabled="setting.isHostingsShared || (user.ID === $root.user.ID)" type="checkbox" checklist-model="setting.sharedHostingUsers" checklist-value="user.ID">
+                                {{user.LAST_NAME}} {{user.NAME}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+    <button class="btn btn-finish btn-large" ng-click="savePermissions()">Сохранить</button>
+</div>
+        {{config.settings}}

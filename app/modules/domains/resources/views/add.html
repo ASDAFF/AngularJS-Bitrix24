@@ -1,0 +1,68 @@
+<div class="modal-preloader">
+
+</div>
+<div class="content-area">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="modalOptions.close()" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">{{modalOptions.headerText}}</h4>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" name="newDomain">
+            <fieldset>
+                <!-- Prepended text-->
+                <div class="form-group" ng-class="{true: '', false: 'has-error'}[(!newDomain.name.$error.pattern && !newDomain.name.$error.required) || noValidate == true]">
+                    <label class="col-md-4 control-label" for="name">Имя домена</label>
+                    <div class="col-md-8">
+                        <div class="input-group">
+                            <span class="input-group-addon">http://</span>
+                            <input ng-model="$parent.form.newDomain.name" ng-init="noValidate=true" ng-focus="noValidate=false" ng-required="true" ng-pattern="/^(?:[-A-Za-zА-Яа-я0-9]+\.)+[A-Za-zA-Яа-я]{2,6}$/" id="name" name="name" class="form-control" placeholder="имя домена" type="text">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Appended checkbox -->
+                <div class="form-group" ng-class="{true: '', false: 'has-error'}[!newDomain.expiration_date.$error.required || noValidate_date == true]">
+                    <label class="col-md-4 control-label" for="expiration date">Дата продления</label>
+                    <div class="col-md-8">
+                        <input ng-model="$parent.form.newDomain.expiration_date" ng-init="noValidate_date=true" ng-focus="noValidate_date=false" ng-required="true" ng-blur="fixJqueryEvent($event)" id="expiration_date" name="expiration_date" type="text"  class="form-control input-md">
+                        <p class="help-block">
+                        <div class="row" ng-if="!newDomain.name.$error.pattern && !newDomain.name.$error.required">
+                            <div class="col-md-6">
+                                <a href="" ng-click="$parent.domainWhoisNew()" class="table-settings pull-left">Получить автоматически </a>
+                            </div>
+                            <div class="col-md-1">
+                                <img ng-show="$parent.whoisWait" ng-hide="!$parent.whoisWait" style="margin-left:10px;" class="img" src="/assets/images/spinners/spinner22.gif"/>
+                            </div>
+                        </div>
+                        </p>
+                    </div>
+                </div>
+
+
+                <!-- Comment -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="comment">Комментарий</label>
+                    <div class="col-md-8">
+                        <textarea ng-model="$parent.form.newDomain.comment" style="resize:none;" name="comment" id="comment" cols="30" rows="3" class="form-control"></textarea>
+                    </div>
+                </div>
+
+                <!-- Multiple Checkboxes (inline) -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="checkboxes">Общий доступ</label>
+                    <div class="col-md-4">
+                        <label class="checkbox-inline" for="checkboxes-0">
+                            <input type="checkbox" ng-checked="$parent.form.newDomain.is_shared" ng-model="$parent.form.newDomain.is_shared" name="is_shared">
+                            Доступен всем
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="modalOptions.close()">{{modalOptions.closeButtonText}}</button>
+        <button ng-disabled="newDomain.$invalid" type="button" class="btn btn-primary" ng-click="modalOptions.ok();">{{modalOptions.actionButtonText}}</button>
+    </div>
+</div>

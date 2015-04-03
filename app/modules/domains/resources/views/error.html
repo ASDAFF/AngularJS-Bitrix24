@@ -1,0 +1,10 @@
+<div class="modal-header modal-header-warning">
+    <button type="button" class="close" ng-click="modalOptions.close()" aria-hidden="true">&times;</button>
+    <h4 class="modal-title"><i class="icon icon-warning"></i> {{modalOptions.headerText}}</h4>
+</div>
+<div class="modal-body">
+    {{modalOptions.bodyText}}
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-warning" ng-click="modalOptions.ok();">{{modalOptions.actionButtonText}}</button>
+</div>
